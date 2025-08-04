@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MegaDee - Full Stack Developer Portfolio</title>
+    <link rel="shortcut icon" href="./images/mdlogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="header-left">
+            <img src="./images/mdlogo.png" alt="MegaDee Logo" />
+            <p><b>MegaDee</b></p>
+        </div>
+        <div class="header-right">
+            <a href="#home">Home</a>
+            <a href="#project">Projects</a>
+            <a href="#aboutme">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="mobile-menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Hi, I'm Israel <br> a.k.a MegaDee</h1>
+                <h2>Full Stack Developer</h2>
+                <p>Crafting modern, responsive, and user-focused web applications with passion and precision.</p>
+                <div class="hero-cta">
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="./images/headshot.png" alt="MegaDee Headshot" />
+            </div>
+        </section>
+
+        <!-- Projects, About, and Contact sections remain unchanged -->
+        <section class="projects" id="project">
+            <h2>My Projects</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" aria-label="Previous project">&#10094;</button>
+                <div class="carousel-track">
+                    <div class="project-card">
+                        <img src="./images/MYKD.jpg" alt="MYKD Gaming Site" />
+                        <h3>MYKD - Gaming Site</h3>
+                        <p>An immersive gaming platform with real-time features and stunning visuals.</p>
+                        <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="project-card">
+                        <img src="./images/newsblog.jpg" alt="News Blog" />
+                        <h3>News Blog</h3>
+                        <p>A dynamic news platform with seamless content management and user interaction.</p>
+                        <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="project-card">
+                        <img src="./images/jobboard.jpg" alt="Job Board" />
+                        <h3>Job Board</h3>
+                        <p>A robust job listing platform with advanced search and filtering capabilities.</p>
+                        <a href="https://bumblejobs.vercel.app/" class="project-link">View Project <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="project-card">
+                        <img src="./images/ecommerce.jpg" alt="E-commerce Site" />
+                        <h3>E-commerce Site</h3>
+                        <p>A feature-rich online store with secure payments and intuitive navigation.</p>
+                        <a href="#" class="project-link">In Progress <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <button class="carousel-btn next" aria-label="Next project">&#10095;</button>
+            </div>
+        </section>
+
+        <section class="aboutme" id="aboutme">
+            <div class="about-content">
+                <h2>About Me</h2>
+                <p>I'm a passionate Full Stack Developer with expertise in creating modern, scalable web applications.
+                    My focus is on delivering clean code, intuitive user experiences, and accessible designs.</p>
+                <p>With a strong foundation in both front-end and back-end technologies, I thrive on turning ideas into
+                    reality. Let's collaborate to build something extraordinary!</p>
+                <div class="skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">MongoDB</span>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="./images/aboutme.jpg" alt="About Me Image" />
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <h2>Get In Touch</h2>
+            <p>Ready to bring your project to life? Let's connect and create something amazing together!</p>
+
+            <form class="contact-form" id="contact-form" action="#" method="POST">
+
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+            <div class="social-links">
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 MegaDee. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
