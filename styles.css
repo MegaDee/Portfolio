@@ -157,7 +157,7 @@ header {
 .hero-image img {
     max-width: 450px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); */
 }
 
 /* Projects Section */
