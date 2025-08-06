@@ -1,3 +1,7 @@
+@layer design-system, reset, base, utilities, components, layout, overrides;
+@import "https://unpkg.com/open-props" layer(design-system.tokens);
+@import "https://cdn.jsdelivr.net/gh/mobalti/open-props-interfaces@main/hdr-palettes-astro-op/src/styles/hdr-palettes.css" layer(design-system.tokens-hdr);
+
 /* Reset and base styles */
 * {
     margin: 0;
@@ -157,7 +161,6 @@ header {
 .hero-image img {
     max-width: 450px;
     border-radius: 20px;
-    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); */
 }
 
 /* Projects Section */
@@ -174,100 +177,163 @@ header {
     margin-bottom: 3rem;
 }
 
-.carousel-container {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    overflow: hidden;
-}
+@layer layout {
+    .projects {
+        container-type: inline-size;
+    }
 
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    gap: 2rem;
-}
+    .cards {
+        --_carousel-inline-padding: var(--size-3);
+        display: grid;
+        gap: var(--size-3);
+        grid-auto-flow: column;
+        grid-column: 2/-1;
+        grid-template-rows: 200px 1fr;
+        inline-size: 100%;
+        list-style: none;
+        min-block-size: 400px;
+        overflow-inline: auto;
+        overscroll-behavior-inline: contain;
+        padding-block: var(--size-7);
+        padding-inline: var(--_carousel-inline-padding);
+        scroll-behavior: smooth;
+        scroll-padding-inline: var(--_carousel-inline-padding);
+        scroll-snap-type: inline mandatory;
 
-.project-card {
-    min-width: 320px;
-    max-width: 320px;
-    background: #f7fafc;
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    flex-shrink: 0;
-    transition: transform 0.3s ease;
-}
+        /* md-and-above */
+        @media (width >=768px) {
+            --_carousel-inline-padding: var(--size-7);
+        }
+    }
 
-.project-card:hover {
-    transform: translateY(-10px);
-}
+    .card {
+        scroll-snap-align: start;
+        background-color: #f7fafc;
+        border-radius: calc(var(--radius-3) * 1.25);
+        box-shadow: var(--shadow-2);
+        display: grid;
+        grid-row: 1/-1;
+        grid-template-rows: subgrid;
+        padding: var(--size-2);
+        inline-size: min(75cqi, 400px);
+    }
 
-.project-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-}
+    .visual {
+        border-radius: var(--radius-3);
+        overflow: clip;
+    }
 
-.project-card h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #1a202c;
-    margin-bottom: 0.8rem;
-}
+    .img {
+        display: block;
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
+        background-color: #e6fffa;
+    }
 
-.project-card p {
-    font-size: 1rem;
-    color: #4a5568;
-    margin-bottom: 1rem;
-}
+    .content {
+        display: grid;
+        align-content: space-between;
+        padding: var(--size-3);
+        gap: var(--size-7);
+        color: #2d3748;
+    }
 
-.project-link {
-    color: #3182ce;
-    font-weight: 500;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.3s ease;
-}
+    .content-wrapper {
+        display: grid;
+        gap: var(--size-3);
+    }
 
-.project-link:hover {
-    color: #2b6cb0;
-}
+    .title {
+        font: 700 1.4rem/1.5 "Roboto", system-ui;
+        text-wrap: pretty;
+    }
 
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #3182ce;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    padding: 0.8rem;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
+    .desc {
+        font: 400 1rem/1.6 "Roboto", system-ui;
+        text-wrap: pretty;
+    }
 
-.carousel-btn:hover:not(:disabled) {
-    background: #2b6cb0;
-}
+    .card-link {
+        --_icon-bg: #3182ce;
+        font: 500 0.9rem/1.2 "Roboto", system-ui;
+        color: #3182ce;
+        text-decoration: none;
+        display: flex;
+        gap: var(--size-2);
+        align-items: center;
 
-.carousel-btn:disabled {
-    background: #b0c4de;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
+        &:hover {
+            --_icon-bg: color-mix(in oklch, #3182ce, #2d3748 8%);
+        }
 
-.carousel-btn.prev {
-    left: -60px;
-}
+        &::before {
+            display: grid;
+            place-items: center;
+            background-color: var(--_icon-bg);
+            color: white;
+            inline-size: var(--size-7);
+            block-size: var(--size-7);
+            border-radius: var(--radius-2);
+            font: 600 0.9rem/1 'Material Symbols Outlined';
+            content: 'arrow_forward_ios' / 'Arrow';
+        }
+    }
+    .diabled{
+        pointer-events: none;
+        cursor: default;
+        opacity: 0.5;
+    }
 
-.carousel-btn.next {
-    right: -60px;
+    @supports (scroll-marker-group: after) {
+        .cards {
+            anchor-name: --carousel;
+            scrollbar-width: none;
+
+            &::scroll-button(*) {
+                -webkit-tap-highlight-color: transparent;
+                -webkit-touch-callout: none;
+                background-color: transparent;
+                block-size: var(--size-px-9);
+                border-radius: var(--radius-4);
+                color: #3182ce;
+                cursor: pointer;
+                display: inline grid;
+                font: 400 1.5rem/0 'Material Symbols Outlined';
+                inline-size: var(--size-px-9);
+                outline-width: 0;
+                place-items: center;
+                position-anchor: --carousel;
+                inset-block-end: calc(anchor(end) - calc(var(--size-2) + var(--size-px-9)));
+                inset-inline-start: calc(anchor(start) + var(--_carousel-inline-padding));
+                position: absolute;
+                user-select: none;
+                border: var(--border-size-1) solid #3182ce;
+            }
+
+            &::scroll-button(*):focus:not(:disabled) {
+                outline: var(--border-size-2) dashed #3182ce;
+            }
+
+            &::scroll-button(*):disabled {
+                cursor: not-allowed;
+                opacity: 0.4;
+            }
+
+            &::scroll-button(*):not(:disabled):hover {
+                background-color: rgba(49, 130, 206, 0.1);
+            }
+
+            &::scroll-button(inline-start) {
+                content: 'arrow_back' / 'Scroll back';
+            }
+
+            &::scroll-button(inline-end) {
+                content: 'arrow_forward' / 'Scroll forward';
+                inset-inline-start: calc(anchor(start) + var(--size-2) + var(--size-px-9) + var(--_carousel-inline-padding));
+            }
+        }
+    }
 }
 
 /* About Section */
@@ -424,14 +490,6 @@ footer {
         align-items: center;
         text-align: center;
     }
-
-    .carousel-btn.prev {
-        left: 10px;
-    }
-
-    .carousel-btn.next {
-        right: 10px;
-    }
 }
 
 @media (max-width: 768px) {
@@ -464,9 +522,8 @@ footer {
         font-size: 1.5rem;
     }
 
-    .project-card {
-        min-width: 280px;
-        max-width: 280px;
+    .card {
+        inline-size: min(85cqi, 320px);
     }
 }
 
@@ -484,8 +541,7 @@ footer {
         font-size: 1rem;
     }
 
-    .carousel-btn {
-        font-size: 1.2rem;
-        padding: 0.5rem;
+    .card {
+        inline-size: min(90cqi, 280px);
     }
 }

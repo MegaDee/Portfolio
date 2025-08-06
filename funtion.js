@@ -1,17 +1,10 @@
 // Initialize EmailJS
 emailjs.init("T_QKgYrKLdRGzwEfJ");
 
-const track = document.querySelector('.carousel-track');
-const prevBtn = document.querySelector('.carousel-btn.prev');
-const nextBtn = document.querySelector('.carousel-btn.next');
-const cards = document.querySelectorAll('.project-card');
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const navMenu = document.querySelector('.header-right');
 const contactForm = document.querySelector('#contact-form');
 const submitBtn = document.querySelector('.contact-form .cta-button');
-
-let currentIndex = 0;
-let autoSlideInterval;
 
 // Utility: Debounce function for resize event
 const debounce = (func, wait) => {
@@ -39,39 +32,11 @@ const showFormMessage = (message, type) => {
   setTimeout(() => messageEl.remove(), 3000);
 };
 
-// Carousel Functions
-const getCardWidth = () => (cards.length > 0 ? cards[0].offsetWidth + 32 : 0);
-
-const updateCarousel = () => {
-  if (track && cards.length > 0) {
-    track.style.transform = `translateX(-${getCardWidth() * currentIndex}px)`;
-    prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex >= cards.length - 1;
-  }
-};
-
-const startAutoSlide = () => {
-  if (cards.length > 0) {
-    autoSlideInterval = setInterval(() => {
-      if (currentIndex < cards.length - 1) {
-        currentIndex++;
-      } else {
-        currentIndex = 0;
-      }
-      updateCarousel();
-    }, 6000);
-  }
-};
-
-const stopAutoSlide = () => {
-  clearInterval(autoSlideInterval);
-};
-
 // Form Submission
 if (contactForm) {
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+   
     const name = document.querySelector('#name')?.value.trim();
     const email = document.querySelector('#email')?.value.trim();
     const message = document.querySelector('#message')?.value.trim();
@@ -119,48 +84,6 @@ if (contactForm) {
   });
 }
 
-// Carousel Navigation
-if (prevBtn && nextBtn && track && cards.length > 0) {
-  nextBtn.addEventListener('click', () => {
-    stopAutoSlide();
-    if (currentIndex < cards.length - 1) {
-      currentIndex++;
-      updateCarousel();
-    }
-    startAutoSlide();
-  });
-
-  prevBtn.addEventListener('click', () => {
-    stopAutoSlide();
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateCarousel();
-    }
-    startAutoSlide();
-  });
-
-  // Pause auto-slide on hover over track or buttons
-  [track, prevBtn, nextBtn].forEach(el => {
-    el.addEventListener('mouseenter', stopAutoSlide);
-    el.addEventListener('mouseleave', startAutoSlide);
-  });
-
-  // Keyboard navigation for carousel
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' && currentIndex < cards.length - 1) {
-      stopAutoSlide();
-      currentIndex++;
-      updateCarousel();
-      startAutoSlide();
-    } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
-      stopAutoSlide();
-      currentIndex--;
-      updateCarousel();
-      startAutoSlide();
-    }
-  });
-}
-
 // Mobile Menu Toggle
 if (mobileMenuToggle && navMenu) {
   mobileMenuToggle.addEventListener('click', () => {
@@ -199,11 +122,3 @@ document.querySelectorAll('.header-right a').forEach(anchor => {
     }
   });
 });
-
-// Debounced resize handler
-window.addEventListener('resize', debounce(() => {
-  updateCarousel();
-}, 100));
-
-// Start auto-slide on page load
-startAutoSlide();
